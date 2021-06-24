@@ -432,17 +432,19 @@ li.dropmenu:hover>a {
     color: white;
     text-transform: uppercase;
     font-weight: 700;
-    margin-bottom: 15px;    
+    margin-bottom: 15px;
+     background-color: transparent;
+     border: 1px solid white;
+
 }
 
-.btn-more-details {
-    background-color: transparent;
-    border: 1px solid white;
+.btn:hover {
+   background-color: rgba(255, 255, 255, 0.25);
+   border: none;
 }
 
 .btn-add-to-cart {
-    background-color: rgba(255, 255, 255, 0.25);
-    border: none;
+    
     background-image: url("images/basket-white.png");
     background-repeat: no-repeat;
     background-position-x: 175px;
