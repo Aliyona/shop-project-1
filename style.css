@@ -243,15 +243,16 @@ li.dropmenu:hover>a {
 .filter-by-options {
     border-right: 1px solid white;
     background-color: rgba(255, 255, 255, 0.25);
+    padding-bottom: 15px;
 }
 
 .options {
     padding-top: 25px;
-    padding-left: 25px;
-    padding-bottom: 25px;
+    padding-left: 25px;    
 }
 
 .option-name {
+    margin-bottom: 15px;
     font-size: 21px;
     line-height: 40px;
     color: #ffffff;
@@ -259,17 +260,49 @@ li.dropmenu:hover>a {
 }
 
 .option-items {
-    list-style: square;
-    padding-left: 25px;
+    list-style: none;
+}
+
+label::before {
+    content: "";
+    display: block;
+    width: 10px;
+    height: 10px;
+    border: 1px solid white;
+}
+input[type="checkbox"]:checked + label::before {
+    background-color: white;
+}
+input[type="checkbox"] {
+    display: none;
 }
 
 .option-items>li {
+    margin-bottom: 25px;
     font-size: 21px;
     line-height: 40px;
     color: #ffffff;
     font-weight: 300;
+} 
+.option-item {
+position: relative;
+display: block;
 }
-
+.option {
+    position: absolute;
+    left: 25px;
+    top: -14px;
+}
+.show-more-options {    
+    text-align: center;
+    margin-bottom: 25px;
+}
+.submit-btn {
+    background-color: rgb(255, 255, 255);
+   }
+#submit {
+    background-color: rgba(35, 90, 147, 0.5);
+}
 .breadcrumbs>li {
     float: left;
     margin-top: 25px;
@@ -396,6 +429,7 @@ li.dropmenu:hover>a {
     font-size: 21px;
     color: #ffffff;
     font-weight: 300;
+    text-decoration: none;
 }
 
 .product-feachers {
