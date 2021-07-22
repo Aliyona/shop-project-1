@@ -61,11 +61,11 @@ console.log(likeBtns);
 //   )
 // );
 // варіант 2 (оптимізований):
-    likeBtns.forEach((item) =>
-        item.addEventListener("click", function () {
-            item.classList.toggle("liked")
-        })
-    );
+likeBtns.forEach((item) =>
+    item.addEventListener("click", function () {
+        item.classList.toggle("liked")
+    })
+);
 
 // ============================
 
@@ -132,46 +132,170 @@ window.addEventListener("scroll", showModalByScroll);
 
 // change product quantity:
 // ===================================
-let incrementBtns = document.querySelectorAll(".increment-button");
-let decrementBtns = document.querySelectorAll(".decrement-button");
-let quantityInputs = document.querySelectorAll(".products-quantity input");
+// мій варіант виконання ДЗ (працює):
+// let incrementBtns = document.querySelectorAll(".increment-button");
+// let decrementBtns = document.querySelectorAll(".decrement-button");
+// let quantityInputs = document.querySelectorAll(".products-quantity input");
 
 // console.log(decrementBtns);
 // console.log(incrementBtns);
 // console.log(quantityInputs);
 
-for (let i = 0; i < decrementBtns.length; i++) {
-    if (+quantityInputs[i].value > 1) {
-        decrementBtns[i].disabled = false
-    } else {
-        decrementBtns[i].disabled = true;        
-    };
-};
-for (let i = 0; i < incrementBtns.length; i++) {
-    incrementBtns[i].addEventListener("click", function () {
-        let currentValue = +quantityInputs[i].value;
-        if (currentValue < 5) {
-            quantityInputs[i].value = currentValue + 1;
-        decrementBtns[i].disabled = false;
-        } else {
-            incrementBtns[i].disabled = true;
-        }        
-    })
-};
-for (let i = 0; i < decrementBtns.length; i++) {
-    decrementBtns[i].addEventListener("click", function () {
-        let currentValue = +quantityInputs[i].value;
-        if (currentValue > 2 && currentValue <= 5) {
-            quantityInputs[i].value = currentValue - 1;
-            incrementBtns[i].disabled = false;
-        } else {
-            quantityInputs[i].value = currentValue - 1;
-            decrementBtns[i].disabled = true;            
-        }        
-    }) 
-};
+// for (let i = 0; i < decrementBtns.length; i++) {
+//     if (+quantityInputs[i].value > 1) {
+//         decrementBtns[i].disabled = false
+//     } else {
+//         decrementBtns[i].disabled = true;        
+//     };
+// };
+// for (let i = 0; i < incrementBtns.length; i++) {
+//     incrementBtns[i].addEventListener("click", function () {
+//         let currentValue = +quantityInputs[i].value;
+//         if (currentValue < 5) {
+//             quantityInputs[i].value = currentValue + 1;
+//         decrementBtns[i].disabled = false;
+//         } else {
+//             incrementBtns[i].disabled = true;
+//         }        
+//     })
+// };
+// for (let i = 0; i < decrementBtns.length; i++) {
+//     decrementBtns[i].addEventListener("click", function () {
+//         let currentValue = +quantityInputs[i].value;
+//         if (currentValue > 2 && currentValue <= 5) {
+//             quantityInputs[i].value = currentValue - 1;
+//             incrementBtns[i].disabled = false;
+//         } else {
+//             quantityInputs[i].value = currentValue - 1;
+//             decrementBtns[i].disabled = true;            
+//         }        
+//     }) 
+// };
+// ============================================
+// варіант вчителя:
+// let decrementBtns = document.querySelectorAll(".decrement-button")[0];
+// let incrementBtns = document.querySelectorAll(".increment-button")[0];
+// let quantityInputs = document.querySelectorAll(".products-quantity input")[0];
+// let currentCount = +quantityInputs.value;
 
+// function toggleButtonsState(count) {
+//   decrementBtns.disabled = count <= 1;
+//   incrementBtns.disabled = count >= 5;
+// }
+// toggleButtonsState(currentCount);
+
+// incrementBtns.addEventListener("click", function () {
+//   let currentCount = +quantityInputs.value;
+//   let nextCount = currentCount + 1;
+//   quantityInputs.value = nextCount;
+//   toggleButtonsState(nextCount);
+// });
+// decrementBtns.addEventListener("click", function () {
+//   let currentCount = +quantityInputs.value;
+//   let nextCount = currentCount - 1;
+//   quantityInputs.value = nextCount;
+//   toggleButtonsState(nextCount);
+// });
+// ====================================================
+// можна дану функцію:
+// function toggleButtonsState(count) {
+//   decrementBtns.disabled = count <= 1;
+//   incrementBtns.disabled = count >= 5;
+// прописати через if...else:
+
+// function toggleButtonsState(count) {
+//     if (count <= 1) {
+//     decrementBtns.disabled = true;
+//     incrementBtns.disabled = false;
+//     } else if (count >= 5) {
+//     decrementBtns.disabled = false;
+//     incrementBtns.disabled = true;
+//     } else {
+//     decrementBtns.disabled = false;
+//     incrementBtns.disabled = false;
+//     }
+// };
+
+// ====================================================
+
+// варіант вчителя за допомогою функції-конструктора (працює лише для першої кнопки):
+// let decrementBtns = document.querySelectorAll(".decrement-button")[0];
+// let incrementBtns = document.querySelectorAll(".increment-button")[0];
+// let quantityInputs = document.querySelectorAll(".products-quantity input")[0];
+
+// function Counter(incrementBtn, decrementBtn, inputField) {
+//     this.domRefs = {
+//         incrementBtn,
+//         decrementBtn,
+//         inputField,
+//     };
+//         this.toggleButtonsState = function () {
+//         let count = this.domRefs.inputField.value;
+//         this.domRefs.decrementBtn.disabled = count <= 1;
+//         this.domRefs.incrementBtn.disabled = count >= 5;
+//       };
+//     this.toggleButtonsState();
+
+//         this.increment = function () {        
+//         let currentCount = +this.domRefs.inputField.value;
+//         let nextCount = currentCount + 1;
+//         this.domRefs.inputField.value = nextCount;
+//         this.toggleButtonsState(nextCount);
+//         };
+
+//         this.decrement = function () {
+//         let currentCount = +this.domRefs.inputField.value;
+//         let nextCount = currentCount - 1;
+//         this.domRefs.inputField.value = nextCount;
+//         this.toggleButtonsState(nextCount);
+//     };
+//     this.domRefs.incrementBtn.addEventListener("click", this.increment.bind(this));
+//     this.domRefs.decrementBtn.addEventListener("click", this.decrement.bind(this));
+// };
+// let counter = new Counter(incrementBtns, decrementBtns, quantityInputs);
+//     console.log(counter);      
+// ==============================================
+// варіант мій за допомогою функції-конструктора (працює для всіх кнопок):
+let decrementBtns = document.querySelectorAll(".decrement-button");
+let incrementBtns = document.querySelectorAll(".increment-button");
+let quantityInputs = document.querySelectorAll(".products-quantity input");
+
+function Counter(incrementBtn, decrementBtn, inputField) {
+    this.domRefs = {
+        incrementBtn,
+        decrementBtn,
+        inputField,
+    };
+    this.toggleButtonsState = function () {
+        let count = this.domRefs.inputField.value;
+        this.domRefs.decrementBtn.disabled = count <= 1;
+        this.domRefs.incrementBtn.disabled = count >= 5;
+    };
+    this.toggleButtonsState();
+
+    this.increment = function () {
+        let currentCount = +this.domRefs.inputField.value;
+        let nextCount = currentCount + 1;
+        this.domRefs.inputField.value = nextCount;
+        this.toggleButtonsState(nextCount);
+    };
+
+    this.decrement = function () {
+        let currentCount = +this.domRefs.inputField.value;
+        let nextCount = currentCount - 1;
+        this.domRefs.inputField.value = nextCount;
+        this.toggleButtonsState(nextCount);
+    };
+    this.domRefs.incrementBtn.addEventListener("click", this.increment.bind(this));
+    this.domRefs.decrementBtn.addEventListener("click", this.decrement.bind(this));
+};
+for (let i = 0; i < quantityInputs.length; i++) {
+    let counter = new Counter(incrementBtns[i], decrementBtns[i], quantityInputs[i]);
+    console.log(counter);
+};
 // =============================
 // slick slider
 
-$(".slider-block").slick({dots:true});
+$(".slider-block").slick({
+    dots: true
+});
